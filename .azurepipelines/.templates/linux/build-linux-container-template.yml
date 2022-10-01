@@ -108,7 +108,7 @@ steps:
       podman logout ${{ parameters.REGISTRY }}
     displayName: Run Podman Login, Build, Push and Logout
     workingDirectory: ${{ parameters.CONTEXT }}
-    condition: and(eq('${{ parameters.USE_PODMAN }}', false), eq('${{ parameters.USE_DOCKER }}', true))
+    condition: and(eq(${{ parameters.USE_PODMAN }}, true), eq(${{ parameters.USE_DOCKER }}, false))
 
 
   - bash: |
@@ -133,4 +133,4 @@ steps:
       docker logout ${{ parameters.REGISTRY }}
     displayName: Run Docker Login, Build, Push and Logout
     workingDirectory: ${{ parameters.CONTEXT }}
-    condition: and(eq('${{ parameters.USE_PODMAN }}', false), eq('${{ parameters.USE_DOCKER }}', true))
+    condition: and(eq(${{ parameters.USE_PODMAN }}, false), eq(${{ parameters.USE_DOCKER }}, true))
