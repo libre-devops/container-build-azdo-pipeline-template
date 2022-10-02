@@ -118,7 +118,6 @@ steps:
       docker login -u ${{ parameters.USERNAME }} -p ${{ parameters.PASSWORD }} ${{ parameters.REGISTRY }} && \
       
       docker build \
-      --file="${{ parameters.DOCKERFILE_NAME }}" \
       --tag="${{ parameters.REGISTRY }}/${{ parameters.USERNAME }}/${{ parameters.IMAGE_NAME }}${{ parameters.TAGS }}" \
       --build-arg NORMAL_USER="${{ parameters.NORMAL_USER }}"  \
       --build-arg ACCEPT_EULA="y" \
@@ -126,7 +125,8 @@ steps:
       --build-arg AZP_URL="${{ parameters.AZP_URL }}" \
       --build-arg AZP_TOKEN="${{ parameters.AZP_TOKEN }}" \
       --build-arg AZP_POOL="${{ parameters.AZP_POOL }}" \
-      --build-arg AZP_WORK="${{ parameters.AZP_WORK }}" && \
+      --build-arg AZP_WORK="${{ parameters.AZP_WORK }}" \
+      . && \
       
       docker push "${{ parameters.REGISTRY }}/${{ parameters.USERNAME }}/${{ parameters.IMAGE_NAME }}${{ parameters.TAGS }}"
       
